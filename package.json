@@ -1,0 +1,28 @@
+{
+  "name": "birthday-reminder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon backend/index.js",
+    "start": "node backend/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MehmetKaldirim/Birthday-Reminder.git"
+  },
+  "author": "Mehmet Kaldirim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MehmetKaldirim/Birthday-Reminder/issues"
+  },
+  "homepage": "https://github.com/MehmetKaldirim/Birthday-Reminder#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.5",
+    "nodemon": "^3.1.4"
+  }
+}
