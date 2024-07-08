@@ -1,15 +1,35 @@
 import { useState } from "react";
-import { Button, Label, TextInput, Datepicker, Select } from "flowbite-react";
+import { Button, Label, TextInput, Select } from "flowbite-react";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    birthday: null,
+    gender: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
   };
+
+  const handleDateChange = (date) => {
+    setFormData((prev) => ({
+      ...prev,
+      birthday: date,
+    }));
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault;
+    e.preventDefault();
     try {
       const res = await fetch("/api/auth/sign-up", {
         method: "POST",
@@ -17,7 +37,10 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-    } catch (error) {}
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   console.log(formData);
@@ -38,7 +61,6 @@ export default function SignUp() {
           </p>
         </div>
         {/* right */}
-
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
@@ -61,19 +83,22 @@ export default function SignUp() {
             </div>
             <div>
               <Label value="Your Birthday" />
-              <Datepicker
-                type="date"
+              <DatePicker
+                selected={formData.birthday}
+                onChange={handleDateChange}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Select your birthday"
+                className="w-full p-2 border border-gray-300 rounded"
                 id="birthday"
-                placeholder="September 29, 1978"
-                onChange={handleChange}
               />
             </div>
 
             <div>
               <Label value="Choose your gender" />
               <Select id="gender" required onChange={handleChange}>
-                <option>Female</option>
-                <option>Male</option>
+                <option value="">Select your gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
               </Select>
             </div>
 
