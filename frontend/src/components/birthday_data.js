@@ -10,7 +10,7 @@ const data = [
   {
     id: 2,
     name: "Nancy Wick",
-    day: 2,
+    day: 12,
     month: 7,
     age: 32,
     gender: "Female",
@@ -18,8 +18,8 @@ const data = [
   {
     id: 3,
     name: "Steven Smith",
-    day: 3,
-    month: 4,
+    day: 13,
+    month: 7,
     age: 21,
     gender: "Male",
   },
