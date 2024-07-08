@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   display: flex;
@@ -8,19 +12,17 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .body {
-text-align: center;
-margin-top: 30px;
-margin-bottom: 30px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-
-
-.card{
+.card {
   position: relative;
   width: 450px;
   height: 100px;
@@ -30,11 +32,9 @@ margin-bottom: 30px;
   margin-bottom: 10px;
 }
 
-.card:hover{
+.card:hover {
   background-color: rgba(255, 182, 193, 0.212);
 }
-
-
 
 .click {
   position: relative;
@@ -47,10 +47,10 @@ margin-bottom: 30px;
 }
 
 @media screen and (max-width: 750px) {
-  .card{
+  .card {
     width: 350px;
   }
-  .click{
+  .click {
     width: 350px;
   }
 }
@@ -64,10 +64,10 @@ margin-bottom: 30px;
   transform: translateX(-50%);
   border-radius: 50%;
   background-color: black;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.35);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
 }
 
-.img img{
+.img img {
   position: absolute;
   top: 0;
   left: 0;
@@ -77,14 +77,14 @@ margin-bottom: 30px;
   border-radius: 20px;
 }
 
-h4{
+h4 {
   text-transform: uppercase;
   position: absolute;
   top: 50px;
   left: 37%;
 }
 
-.btn{
+.btn {
   position: absolute;
   background-color: palevioletred;
   color: #fff;
@@ -95,23 +95,23 @@ h4{
   left: 42%;
 }
 
-.card-2{
+.card-2 {
   background-color: rgba(144, 238, 144, 0.482);
 }
 
-.card-2:hover{
+.card-2:hover {
   background-color: rgba(144, 238, 144, 0.221);
 }
 
 @media screen and (max-width: 750px) {
-  .name1{
+  .name1 {
     left: 33%;
   }
-  .name2{
+  .name2 {
     left: 27%;
   }
 
-  .btn1{
-    left: 37%
+  .btn1 {
+    left: 37%;
   }
 }
