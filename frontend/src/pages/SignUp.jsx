@@ -38,12 +38,19 @@ export default function SignUp() {
       });
       const data = await res.json();
       console.log(data);
+      // Reset form data after successful submission
+      setFormData({
+        username: "",
+        email: "",
+        birthday: null,
+        gender: "",
+        password: "",
+      });
     } catch (error) {
       console.error(error);
     }
   };
 
-  console.log(formData);
   return (
     <div className="min-h-screen mt-20">
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -69,6 +76,7 @@ export default function SignUp() {
                 type="text"
                 placeholder="Username"
                 id="username"
+                value={formData.username}
                 onChange={handleChange}
               />
             </div>
@@ -78,24 +86,33 @@ export default function SignUp() {
                 type="email"
                 placeholder="name@company.com"
                 id="email"
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <Label value="Your Birthday" />
+            <div className="flex flex-col gap-4">
+              <Label
+                value="Your Birthday"
+                className="text-sm font-medium text-gray-900 dark:text-white"
+              />
               <DatePicker
                 selected={formData.birthday}
                 onChange={handleDateChange}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select your birthday"
-                className="w-full p-2 border border-gray-300 rounded"
+                className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg"
                 id="birthday"
               />
             </div>
 
             <div>
               <Label value="Choose your gender" />
-              <Select id="gender" required onChange={handleChange}>
+              <Select
+                id="gender"
+                value={formData.gender}
+                required
+                onChange={handleChange}
+              >
                 <option value="">Select your gender</option>
                 <option value="Female">Female</option>
                 <option value="Male">Male</option>
@@ -108,6 +125,7 @@ export default function SignUp() {
                 type="password"
                 placeholder="Password"
                 id="password"
+                value={formData.password}
                 onChange={handleChange}
               />
             </div>

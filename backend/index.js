@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
@@ -15,6 +16,14 @@ mongoose
   });
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5010", // Adjust this to your frontend's URL
+    methods: ["POST", "GET"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 app.use(express.json());
 
