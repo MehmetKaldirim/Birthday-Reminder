@@ -1,6 +1,13 @@
 import { useState } from "react";
-import { Button, Label, TextInput, Select } from "flowbite-react";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  Label,
+  TextInput,
+  Select,
+  Alert,
+  Spinner,
+} from "flowbite-react";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -13,11 +20,15 @@ export default function SignUp() {
     password: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [id]: value,
+      [id]: value.trim(),
     }));
   };
 
@@ -30,14 +41,28 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      !formData.username ||
+      !formData.email ||
+      !formData.password ||
+      !formData.birthday ||
+      !formData.gender
+    ) {
+      return setErrorMessage("Please fill out all fields");
+    }
+
     try {
+      setLoading(true);
+      setErrorMessage(null);
       const res = await fetch("/api/auth/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      if (data.success === false) {
+        return setErrorMessage(data.message);
+      }
       // Reset form data after successful submission
       setFormData({
         username: "",
@@ -46,8 +71,14 @@ export default function SignUp() {
         gender: "",
         password: "",
       });
+
+      if (res.ok) {
+        navigate("/sign-in");
+      }
+      setLoading(false);
     } catch (error) {
-      console.error(error);
+      setErrorMessage(error.message);
+      setLoading(false);
     }
   };
 
@@ -129,8 +160,19 @@ export default function SignUp() {
                 onChange={handleChange}
               />
             </div>
-            <Button gradientDuoTone="purpleToPink" type="submit">
-              Sign Up
+            <Button
+              gradientDuoTone="purpleToPink"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">Loading</span>
+                </>
+              ) : (
+                "Sign up"
+              )}
             </Button>
           </form>
           <div className="flex gap-2 text-sm mt-5">
@@ -139,6 +181,11 @@ export default function SignUp() {
               Sign In
             </Link>
           </div>
+          {errorMessage && (
+            <Alert className="mt-5" color="failure">
+              {errorMessage}
+            </Alert>
+          )}
         </div>
       </div>
     </div>
