@@ -38,7 +38,7 @@ export default function Users() {
               </Table.HeadCell>
             </Table.Head>
             {users.map((user) => (
-              <Table.Body className="divide-y">
+              <Table.Body className="divide-y" key={user._id}>
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                   <Table.Cell>
                     {new Date(user.updatedAt).toLocaleDateString()}
